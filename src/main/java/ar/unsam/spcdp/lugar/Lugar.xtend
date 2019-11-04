@@ -1,11 +1,25 @@
 package ar.unsam.spcdp.lugar
 
 import ar.unsam.spcdp.transicion.Transicion
-import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Lugar {
-	
+
 	int marcas
-	List<Transicion> transiciones = newArrayList
-	
+	Integer input
+	Transicion output
+
+	def transicionar() {
+		output.transicionar(this)
+	}
+
+	def recibirTransicion() {
+		if(input !== null) marcas += input
+	}
+
+	def restarMarcas() {
+		marcas -= output.marcaHabilitada
+	}
+
 }
