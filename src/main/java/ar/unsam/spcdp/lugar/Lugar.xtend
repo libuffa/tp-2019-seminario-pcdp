@@ -6,12 +6,16 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Lugar {
 
+	int id
 	int marcas
-	Integer input
+	Integer input = 1
 	Transicion output
 
 	def transicionar() {
-		output.transicionar(this)
+		if(this.transicionHabilitada) {
+			output.transicionar()
+			this.restarMarcas
+		}
 	}
 
 	def recibirTransicion() {
@@ -20,6 +24,14 @@ class Lugar {
 
 	def restarMarcas() {
 		marcas -= output.marcaHabilitada
+	}
+	
+	def transicionHabilitada() {
+		if(this.output !== null) {
+			marcas >= this.output.marcaHabilitada
+		} else {
+			false
+		}
 	}
 
 }

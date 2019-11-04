@@ -10,28 +10,28 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Transicion {
+  private int id;
+  
   private List<Lugar> lugares = CollectionLiterals.<Lugar>newArrayList();
   
-  private int marcaHabilitada;
+  private int marcaHabilitada = 1;
   
-  public int transicionar(final Lugar lugar) {
-    int _xifexpression = (int) 0;
-    int _marcas = lugar.getMarcas();
-    boolean _greaterEqualsThan = (_marcas >= this.marcaHabilitada);
-    if (_greaterEqualsThan) {
-      int _xblockexpression = (int) 0;
-      {
-        final Consumer<Lugar> _function = new Consumer<Lugar>() {
-          public void accept(final Lugar _lugar) {
-            _lugar.recibirTransicion();
-          }
-        };
-        this.lugares.forEach(_function);
-        _xblockexpression = lugar.restarMarcas();
+  public void transicionar() {
+    final Consumer<Lugar> _function = new Consumer<Lugar>() {
+      public void accept(final Lugar _lugar) {
+        _lugar.recibirTransicion();
       }
-      _xifexpression = _xblockexpression;
-    }
-    return _xifexpression;
+    };
+    this.lugares.forEach(_function);
+  }
+  
+  @Pure
+  public int getId() {
+    return this.id;
+  }
+  
+  public void setId(final int id) {
+    this.id = id;
   }
   
   @Pure

@@ -7,14 +7,26 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Lugar {
+  private int id;
+  
   private int marcas;
   
-  private Integer input;
+  private Integer input = Integer.valueOf(1);
   
   private Transicion output;
   
   public int transicionar() {
-    return this.output.transicionar(this);
+    int _xifexpression = (int) 0;
+    boolean _transicionHabilitada = this.transicionHabilitada();
+    if (_transicionHabilitada) {
+      int _xblockexpression = (int) 0;
+      {
+        this.output.transicionar();
+        _xblockexpression = this.restarMarcas();
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
   }
   
   public int recibirTransicion() {
@@ -30,6 +42,26 @@ public class Lugar {
     int _marcas = this.marcas;
     int _marcaHabilitada = this.output.getMarcaHabilitada();
     return this.marcas = (_marcas - _marcaHabilitada);
+  }
+  
+  public boolean transicionHabilitada() {
+    boolean _xifexpression = false;
+    if ((this.output != null)) {
+      int _marcaHabilitada = this.output.getMarcaHabilitada();
+      _xifexpression = (this.marcas >= _marcaHabilitada);
+    } else {
+      _xifexpression = false;
+    }
+    return _xifexpression;
+  }
+  
+  @Pure
+  public int getId() {
+    return this.id;
+  }
+  
+  public void setId(final int id) {
+    this.id = id;
   }
   
   @Pure

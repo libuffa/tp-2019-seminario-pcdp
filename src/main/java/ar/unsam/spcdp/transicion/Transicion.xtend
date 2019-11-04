@@ -7,14 +7,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Transicion {
 
+	int id
 	List<Lugar> lugares = newArrayList
-	int marcaHabilitada
+	int marcaHabilitada = 1
 
-	def transicionar(Lugar lugar) {
-		if (lugar.marcas >= this.marcaHabilitada) {
-			lugares.forEach[_lugar|_lugar.recibirTransicion]
-			lugar.restarMarcas
-		}
+	def transicionar() {
+		lugares.forEach[_lugar|_lugar.recibirTransicion]
 	}
 
 }
